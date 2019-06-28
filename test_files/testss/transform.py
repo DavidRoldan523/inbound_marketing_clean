@@ -12,7 +12,7 @@ class Email:
 		match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', self.email)
 		if match == None:
 			return False
-		"""
+		
 		try:
 			records = dns.resolver.query(self.email.split('@')[1], 'MX')
 			mxRecord = records[0].exchange
@@ -39,7 +39,7 @@ class Email:
 			return True
 		else:
 			return False
-		"""
+		
 
 
 
