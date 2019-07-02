@@ -1,10 +1,14 @@
-import modin.pandas as pd    # pip install pandarallel
 import pandas as pd
 import numpy as np
 import re
 import dns.resolver
 import socket
 import smtplib
+import time
+from pandarallel import pandarallel  # pip install pandarallel
+
+pandarallel.initialize()
+
 
 def verify_email(email):
     email = email.lower()
@@ -35,14 +39,15 @@ def verify_email(email):
     return 1
 
 if __name__ == '__main__':
+    initial_time = time.time()
     column_email_name = 'Email - Lead Capture Data'
     colum_status_email = 'StatusEmail'
     delimiter = ','
     dataframe = pd.read_csv('prueba_camila_corta.csv', engine="python", sep=delimiter, quotechar="'", error_bad_lines=False)
     dataframe.insert(dataframe.columns.get_loc(column_email_name) + 1, colum_status_email, 0)
-    dataframe[colum_status_email] = dataframe[column_email_name].apply(verify_email)
+    dataframe[colum_status_email] = dataframe[column_email_name].parallel_apply(verify_email)
 
-    dataframe.to_csv('pandas_simple.csv', header=True, sep=',')
+    dataframe.to_csv('pandas_test.csv', index=False, header=True, sep=',')
     print(f'Success {time.time() - initial_time} seg')
 
  
