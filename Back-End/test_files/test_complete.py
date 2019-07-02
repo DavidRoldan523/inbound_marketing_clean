@@ -4,8 +4,6 @@ import re
 import dns.resolver
 import socket
 import smtplib
-import time
-
 
 def verify_email(email):
     email = email.lower()
@@ -19,34 +17,27 @@ def verify_email(email):
         host_name = socket.gethostname()
     except Exception:
         return 0
-    """
     try:
         #SMTP lib setup (use debug level for full output)
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.set_debuglevel(0)
         # SMTP Conversation
         server.connect(mxRecord)
-        server.helo(host)
+        server.helo(host_name)
         server.mail('me@domain.com')
         code, message = server.rcpt(str(email))
         server.quit()
-    except Exception:
+    except Exception as e:
         return 0
-    """
     return 1
 
 if __name__ == '__main__':
-    initial_time = time.time()
-    column_email_name = 'Email - Lead Capture Data'
-    colum_status_email = 'StatusEmail'
-    delimiter = ','
-    dataframe = pd.read_csv('prueba_camila_corta.csv', engine="python", sep=delimiter, quotechar="'", error_bad_lines=False)
-    dataframe.insert(dataframe.columns.get_loc(column_email_name) + 1, colum_status_email, 0)
-    dataframe[colum_status_email] = dataframe[column_email_name].apply(verify_email)
-
-    dataframe.to_csv('pandas_test.csv', index=False, header=True, sep=',')
-    print(f'Success {time.time() - initial_time} seg')
+    list_emails = ['laam2005@gmail.com',
+                   'andreson.albe@gmail.com',
+                   'andrruiz40@gmail.com',
+                   'andrruiz40@gmil.com']
+    
+    for email in list_emails:
+        print(f'{email} || {verify_email(email)}')
 
  
-
-

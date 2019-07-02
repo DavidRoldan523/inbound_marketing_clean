@@ -1,5 +1,6 @@
-import pandas as pd
 import modin.pandas as pd
+import pandas as pd
+import numpy as np
 import re
 import dns.resolver
 import socket
@@ -34,15 +35,16 @@ def verify_email(email):
     return 1
 
 if __name__ == '__main__':
-    column_email_name = 'Correo'
+    column_email_name = 'Email - Lead Capture Data'
     colum_status_email = 'StatusEmail'
-    dataframe = pd.read_excel('Convergencia-Junio.xlsx')
+    delimiter = ','
+    dataframe = pd.read_csv('prueba_camila_corta.csv', engine="python", sep=delimiter, quotechar="'", error_bad_lines=False)
     dataframe.insert(dataframe.columns.get_loc(column_email_name) + 1, colum_status_email, 0)
     dataframe[colum_status_email] = dataframe[column_email_name].apply(verify_email)
-    
-    # Create a Pandas Excel writer using XlsxWriter as the engine.
-    writer = pd.ExcelWriter('pandas_simple.xlsx', engine='xlsxwriter')
-    dataframe.to_excel(writer, sheet_name='Sheet1')
-    writer.save()
-    print('Success')
+
+    dataframe.to_csv('pandas_simple.csv', header=True, sep=',')
+    print(f'Success {time.time() - initial_time} seg')
+
  
+
+
