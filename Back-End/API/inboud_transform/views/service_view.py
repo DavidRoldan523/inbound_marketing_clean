@@ -47,7 +47,7 @@ def service(request):
         #Get Data
         csv_file = request.FILES['file']
         column_email_name = request.data.get('email_column_name')
-        colum_status_email = request.data.get('colum_status_email')
+        column_status_email = request.data.get('colum_status_email')
         delimiter = request.data.get('delimiter')
         #Proccess CSV
         dataframe = pd.read_csv(csv_file, sep=delimiter, quotechar="'", error_bad_lines=False)
