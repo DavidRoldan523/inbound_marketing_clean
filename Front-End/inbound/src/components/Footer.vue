@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div class="fluid-container footer">
+      <div class="fluid-container footer fixed-bottom">
         <p class="text-center">Copyright &copy 2018, ABC Marketing. All Rights Reserved.</p>
       </div>
     </div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "Navbar"
+  name: "Footer"
 };
 </script>
 

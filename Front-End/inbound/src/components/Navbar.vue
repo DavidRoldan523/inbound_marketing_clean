@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#"><i class="fas fa-campground"></i> Inbound</a>
       <button
         class="navbar-toggler"
         type="button"
