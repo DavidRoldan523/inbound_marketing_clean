@@ -51,8 +51,8 @@ def service(request):
         delimiter = request.data.get('delimiter')
         #Proccess CSV
         dataframe = pd.read_csv(csv_file, sep=delimiter, quotechar="'", error_bad_lines=False)
-        dataframe.insert(dataframe.columns.get_loc(column_email_name) + 1, colum_status_email, 0)
-        dataframe[colum_status_email] = dataframe[column_email_name].parallel_apply(verify_email)
+        dataframe.insert(dataframe.columns.get_loc(column_email_name) + 1, column_status_email, 0)
+        dataframe[column_status_email] = dataframe[column_email_name].parallel_apply(verify_email)
         #Generate New CSV
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = f'attachment; filename={csv_file.name}'
