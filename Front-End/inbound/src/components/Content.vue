@@ -35,7 +35,7 @@
           <form>
             <div class="form-group mt-3">
               <label for="exampleInputEmail1">Nombre Columna Email</label>
-              <input id="name" type="text" class="form-control ancho" />
+              <input id="name" type="text" class="form-control ancho"  />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Delimitador</label>

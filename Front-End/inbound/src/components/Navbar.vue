@@ -17,7 +17,7 @@
         <ul class="navbar-nav">
           <li class="nav-item active">
             <a class="nav-link" href="#">
-              Home
+              <i class="far fa-question-circle fa-2x"></i>
               <span class="sr-only">(current)</span>
             </a>
           </li>
