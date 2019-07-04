@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="fluid-container footer fixed-bottom">
-        <p class="text-center">Copyright &copy 2018, ABC Marketing. All Rights Reserved.</p>
+        <p class="text-center">Copyright &copy 2019, MarTech. All Rights Reserved.</p>
       </div>
     </div>
   </div>
