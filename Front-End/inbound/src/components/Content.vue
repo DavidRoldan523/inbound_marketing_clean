@@ -33,33 +33,23 @@
           </div>
 
           <form>
-            <div class="form-group mt-3" >
+            <div class="form-group mt-3">
               <label for="exampleInputEmail1">Nombre Columna Email</label>
-              <input
-                type="text"
-                class="form-control"
-                id=""
-                aria-describedby="emailHelp"
-                placeholder=""
-              />
+              <input id="name" type="text" class="form-control ancho" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Delimitador</label>
-              <input
-                type="text"
-                class="form-control"
-                id=""
-                placeholder=""
-              />
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>,</option>
+                <option>;</option>
+                <option>|</option>
+                <option>"</option>
+                <option>'</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Resultado</label>
-              <input
-                type="text"
-                class="form-control"
-                id=""
-                placeholder=""
-              />
+              <input id="result" type="text" class="form-control" />
             </div>
           </form>
         </div>
@@ -73,18 +63,6 @@
         </div>
       </div>
       <div class="card-footer text-muted"></div>
-      <div>
-        <table>
-          <tbody>
-            <tr v-for="todo in todos" :key="todo.id">
-              <td>{{ todo.userId }}</td>
-              <td>{{ todo.id }}</td>
-              <td>{{ todo.title }}</td>
-              <td>{{ todo.completed }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </div>
 </template>
@@ -117,36 +95,35 @@ $(document).on("change", ".file", function() {
         .replace(/C:\\fakepath\\/i, "")
     );
 });
+</script> 
 
-</script>
+<script>
+/* import Vue from "vue";
+import Vuelidate from "vuelidate";
+Vue.use(Vuelidate);
+src = "vuelidate/dist/vuelidate.min.js";
 
-<<script>
-import axios from 'axios'
+import { required, minLength, between } from "vuelidate/lib/validators";
+
 export default {
-  data(){
+  data() {
     return {
-      todos:null
+      name: "",
+      delimitid: 0
+    };
+  },
+  validations: {
+    name: {
+      required,
+      minLength: minLength(4)
+    },
+    age: {
+      between: between(20, 30)
     }
-  },
-  mounted() {
-    console.log('hola mundo')
-    this.getTodos();
-  },
-  methods: {
-    getTodos(){
-      console.log('aca va el codigo')
-      axios
-        .get('https://jsonplaceholder.typicode.com/todos')
-          .then( response => {
-            console.log(response)
-            this.todos = response.data
-          })
-          .catch( e=> console.log(e))
-    }
-  },
-  
-}
+  }
+}; */
 </script>
+
 
 <style scoped>
 img {
@@ -197,6 +174,10 @@ h1 {
   border-color: #007bff;
   outline: none;
   color: #fff;
+}
+
+.ancho {
+  width: 30px;
 }
 </style>
 
