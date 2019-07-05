@@ -5,25 +5,27 @@
         <img class="animated heartBeat" src="@/assets/martechlogo.png" alt />
       </div>
       <div class="card-body pt-1">
-        <form method="POST" action="#" enctype="multipart/form-data">
+        <form id="formTest" method="POST" action="#" enctype="multipart/form-data">
           <!-- COMPONENT START -->
           <div class="archivo">
             <div class="form-group col-md-8">
-              <div class="input-group input-file" name="Fichier1">
+              <div class="custom-file mt-2">
+                <input type="file" class="custom-file-input" id="customFileLang" name="file" lang="es" />
+                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+              </div>
+              <!-- <div class="input-group input-file" name="Fichier1">
                 <span class="input-group-btn">
                   <button class="btn btn-primary btn-choose" type="button">
                     <i class="fas fa-upload"></i>
                   </button>
                 </span>
-                <input type="text" class="form-control" placeholder="Selecciona Archivo CSV   " />
+                <input type="file" id="archivo" name="csv" class="form-control" placeholder="Selecciona Archivo CSV   " />
                 <span class="input-group-btn">
                   <button class="btn btn-outline-warning btn-reset" type="button">Resetear</button>
                 </span>
-              </div>
+              </div>-->
             </div>
           </div>
-        </form>
-        <form>
           <div class="row justify-content-center mt-3">
             <div class="col-md-3">
               <label for>
@@ -37,7 +39,7 @@
               </label>
             </div>
             <div class="col-md-4">
-              <input type="text" class="form-control" id placeholder />
+              <input type="text" name="email_column_name" class="form-control" id placeholder />
             </div>
           </div>
           <div class="form-group row justify-content-center mt-3">
@@ -53,16 +55,16 @@
               </label>
             </div>
             <div class="col-md-4">
-              <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
+              <select class="form-control" id="exampleFormControlSelect1" name="delimiter">
+                <option>,</option>
+                <option>;</option>
               </select>
             </div>
           </div>
           <div class="row justify-content-center mt-3">
             <div class="col-md-3">
               <label for>
-                Resultado
+                Nombre Nueva Columna
                 <i
                   class="fas fa-question-circle fa-xs"
                   data-toggle="tooltip"
@@ -72,7 +74,7 @@
               </label>
             </div>
             <div class="col-md-4">
-              <input type="text" class="form-control" id placeholder />
+              <input type="text" class="form-control" name="column_status_email" placeholder />
             </div>
           </div>
         </form>
@@ -80,7 +82,7 @@
           <button type="button" class="btn btn-outline-info btn-lg">
             <i class="fas fa-broom"></i> Limpiar
           </button>
-          <button type="button" class="btn btn-outline-success btn-lg">
+          <button type="button" @click="mostrarFormulario" class="btn btn-outline-success btn-lg">
             <i class="fas fa-caret-right"></i> Ejecutar
           </button>
         </div>
@@ -101,13 +103,40 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "Content"
+  name: "Content",
+  methods: {
+    mostrarFormulario() {
+      let form = document.getElementById('formTest');
+      let formD = new FormData(form);
+
+      axios({
+        method: 'post',
+        url: 'http://104.131.169.113:8003/api/v1/transform/',
+        data: formD,
+        config: { headers: {'Content-Type': 'multipart/form-data' }}
+        })
+        .then(function (response) {
+            //handle success
+            console.log(response);
+        })
+        .catch(function (response) {
+            //handle error
+            console.log(response);
+        });
+    }
+  }
 };
 
+
+// Funcion para activar los tooltip
 $(function() {
   $('[data-toggle="tooltip"]').tooltip();
 });
+
+// Funcion para el funcionamiento del file input
 function bs_input_file() {
   $(".input-file").before(function() {
     if (
@@ -164,7 +193,7 @@ $(function() {
   bs_input_file();
 });
 
-Swal.fire({
+/* Swal.fire({
   title: "¿Estas seguro?",
   text: "Una vez hecho el proceso no podras revertirlo!",
   type: "warning",
@@ -177,11 +206,12 @@ Swal.fire({
   if (result.value) {
     Swal.fire("Enhorabuena!", "Tu archivo ha sido cargado.", "success");
   }
-});
+}); */
 </script>
 
 
 <style>
+
 img {
   width: 18%;
   height: auto;
@@ -205,5 +235,10 @@ img:hover {
 .archivo {
   display: flex;
   justify-content: center;
+}
+
+input[type="file"] {
+  position: absolute;
+  top: -500px;
 }
 </style>
