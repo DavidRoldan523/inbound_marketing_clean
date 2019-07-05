@@ -2,7 +2,6 @@
   <div id="app">
     <Navbar></Navbar>
     <div class="container animated fadeIn">
-      <Fileupload></Fileupload>
       <Content></Content>
     </div>
     <Footer></Footer>
@@ -13,15 +12,13 @@
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 import Content from "./components/Content.vue";
-import Fileupload from "./components/Fileupload.vue";
 
 export default {
   name: "app",
   components: {
     Navbar,
     Footer,
-    Content,
-    Fileupload
+    Content
   }
 };
 </script>
