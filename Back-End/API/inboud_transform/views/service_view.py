@@ -1,8 +1,6 @@
 import pandas as pd
 import re
 import dns.resolver
-import socket
-import smtplib
 import csv
 
 from rest_framework.decorators import api_view
@@ -19,26 +17,9 @@ def verify_email(email):
     if match == None:
         return 0
     try:
-        records = dns.resolver.query(email.split('@')[1], 'MX')
-        mxRecord = records[0].exchange
-        mxRecord = str(mxRecord)
-        host_name = socket.gethostname()
+        dns.resolver.query(email.split('@')[1], 'MX')
     except Exception:
         return 0
-    """
-    try:
-        #SMTP lib setup (use debug level for full output)
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.set_debuglevel(0)
-        # SMTP Conversation
-        server.connect(mxRecord)
-        server.helo(host)
-        server.mail('me@domain.com')
-        code, message = server.rcpt(str(email))
-        server.quit()
-    except Exception:
-        return 0
-    """
     return 1
 
 @api_view(['POST'])
@@ -60,5 +41,3 @@ def service(request):
         return response
     except Exception as e:
         return Response({'Error': e}, status.HTTP_400_BAD_REQUEST)
-
-
