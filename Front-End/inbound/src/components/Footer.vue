@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div>
-      <div class="fluid-container footer fixed-bottom">
-        <p class="text-center">Copyright &copy; 2019, MarTech. All Rights Reserved.</p>
-      </div>
+    <div class="fluid-container footer fixed-bottom">
+      <p class="text-center">Copyright &copy; 2019, MarTech. All Rights Reserved.</p>
     </div>
   </div>
 </template>
@@ -12,12 +10,11 @@
 export default {
   name: "Footer"
 };
-
 </script>
 
-<style scoped>
+<style>
 .fluid-container.footer {
-  background: rgb(52, 58, 64);
+  background: #343b40
 }
 .fluid-container.footer > *:last-child {
   margin-bottom: 0px;

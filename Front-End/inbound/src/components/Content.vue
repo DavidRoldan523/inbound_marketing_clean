@@ -1,60 +1,82 @@
 <template>
-  <div class="container">
+  <div>
     <div class="card">
-      <div class="card-header">
-        <img src="@/assets/martechlogo.png" alt />
+      <div class="card-header text-center py-md-3">
+        <img class="animated heartBeat" src="@/assets/martechlogo.png" alt />
       </div>
-      <div class="card-body">
-        <div class="direct_content">
-          <div class="container">
-            <div class="form-group">
-              <input type="file" name="img[]" class="file" />
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">
-                    <i class="fas fa-paperclip"></i>
-                  </span>
-                </div>
-                <input
-                  type="text"
-                  class="form-control"
-                  disabled
-                  placeholder="Seleccione el archivo"
-                  aria-label="Upload File"
-                  aria-describedby="basic-addon1"
-                />
-                <div class="input-group-append">
-                  <button class="browse input-group-text btn btn-primary" id="basic-addon2">
-                    <i class="fas fa-search mr-2"></i> Buscar
+      <div class="card-body pt-1">
+        <form method="POST" action="#" enctype="multipart/form-data">
+          <!-- COMPONENT START -->
+          <div class="archivo">
+            <div class="form-group col-md-8">
+              <div class="input-group input-file" name="Fichier1">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary btn-choose" type="button">
+                    <i class="fas fa-upload"></i>
                   </button>
-                </div>
+                </span>
+                <input type="text" class="form-control" placeholder="Selecciona Archivo CSV   " />
+                <span class="input-group-btn">
+                  <button class="btn btn-outline-warning btn-reset" type="button">Resetear</button>
+                </span>
               </div>
             </div>
           </div>
-
-          <form>
-            <div class="form-group mt-3">
-              <label for="exampleInputEmail1">Nombre Columna Email</label>
-              <input id="name" type="text" class="form-control ancho" />
+        </form>
+        <form>
+          <div class="row justify-content-center mt-3">
+            <div class="col-md-3">
+              <label for>
+                Nombre Columna Email
+                <i
+                  class="fas fa-question-circle fa-xs"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Tooltip on top"
+                ></i>
+              </label>
             </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Delimitador</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" id placeholder />
+            </div>
+          </div>
+          <div class="form-group row justify-content-center mt-3">
+            <div class="col-md-3">
+              <label for="exampleFormControlSelect1">
+                Delimitador
+                <i
+                  class="fas fa-question-circle fa-xs"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Tooltip on top"
+                ></i>
+              </label>
+            </div>
+            <div class="col-md-4">
               <select class="form-control" id="exampleFormControlSelect1">
-                <option>Selecciona Opción</option>
-                <option>, (Coma)</option>
-                <option>; (Punto y coma)</option>
-                <option>| (Pipe)</option>
-                <option>" (Comillas dobles)</option>
-                <option>' (Comilla Simple)</option>
+                <option>1</option>
+                <option>2</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Resultado</label>
-              <input id="result" type="text" class="form-control" />
+          </div>
+          <div class="row justify-content-center mt-3">
+            <div class="col-md-3">
+              <label for>
+                Resultado
+                <i
+                  class="fas fa-question-circle fa-xs"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Tooltip on top"
+                ></i>
+              </label>
             </div>
-          </form>
-        </div>
-        <div class="d-flex justify-content-around">
+            <div class="col-md-4">
+              <input type="text" class="form-control" id placeholder />
+            </div>
+          </div>
+        </form>
+        <div class="d-flex justify-content-around mt-4">
           <button type="button" class="btn btn-outline-info btn-lg">
             <i class="fas fa-broom"></i> Limpiar
           </button>
@@ -62,11 +84,21 @@
             <i class="fas fa-caret-right"></i> Ejecutar
           </button>
         </div>
+        <hr />
+        <div class="progress">
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar"
+            aria-valuenow="50"
+            aria-valuemin="0"
+            aria-valuemax="50"
+            style="width: 100%"
+          >50%</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -76,112 +108,102 @@ export default {
 $(function() {
   $('[data-toggle="tooltip"]').tooltip();
 });
-
-$(document).on("click", ".browse", function() {
-  var file = $(this)
-    .parent()
-    .parent()
-    .parent()
-    .find(".file");
-  file.trigger("click");
-});
-$(document).on("change", ".file", function() {
-  $(this)
-    .parent()
-    .find(".form-control")
-    .val(
+function bs_input_file() {
+  $(".input-file").before(function() {
+    if (
+      !$(this)
+        .prev()
+        .hasClass("input-ghost")
+    ) {
+      var element = $(
+        "<input type='file' class='input-ghost' style='visibility:hidden; height:0'>"
+      );
+      element.attr("name", $(this).attr("name"));
+      element.change(function() {
+        element
+          .next(element)
+          .find("input")
+          .val(
+            element
+              .val()
+              .split("\\")
+              .pop()
+          );
+      });
       $(this)
-        .val()
-        .replace(/C:\\fakepath\\/i, "")
-    );
-});
-</script> 
-
-<script>
-/* import Vue from "vue";
-import Vuelidate from "vuelidate";
-Vue.use(Vuelidate);
-src = "vuelidate/dist/vuelidate.min.js";
-
-import { required, minLength, between } from "vuelidate/lib/validators";
-
-export default {
-  data() {
-    return {
-      name: "",
-      delimitid: 0
-    };
-  },
-  validations: {
-    name: {
-      required,
-      minLength: minLength(4)
-    },
-    age: {
-      between: between(20, 30)
+        .find("button.btn-choose")
+        .click(function() {
+          element.click();
+        });
+      $(this)
+        .find("button.btn-reset")
+        .click(function() {
+          element.val(null);
+          $(this)
+            .parents(".input-file")
+            .find("input")
+            .val("");
+        });
+      $(this)
+        .find("input")
+        .css("cursor", "pointer");
+      $(this)
+        .find("input")
+        .mousedown(function() {
+          $(this)
+            .parents(".input-file")
+            .prev()
+            .click();
+          return false;
+        });
+      return element;
     }
+  });
+}
+$(function() {
+  bs_input_file();
+});
+
+Swal.fire({
+  title: "¿Estas seguro?",
+  text: "Una vez hecho el proceso no podras revertirlo!",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  cancelButtonText: "Cancelar",
+  confirmButtonText: "Si, Proceder"
+}).then(result => {
+  if (result.value) {
+    Swal.fire("Enhorabuena!", "Tu archivo ha sido cargado.", "success");
   }
-}; */
+});
 </script>
 
 
-<style scoped>
+<style>
 img {
-  width: 20%;
+  width: 18%;
   height: auto;
 }
 
-.direct_content {
+.card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+img:hover {
+  animation-iteration-count: infinite;
+  animation-delay: 2s;
+  animation-duration: 5s;
+}
+
+.archivo {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.file {
-  visibility: hidden;
-  position: absolute;
-}
-
-/* 
- * Styles for demo only 
- */
-
-.container {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 24.08px 3.92px rgba(0, 0, 0, 0.25);
-  width: 50%;
-}
-
-h1 {
-  color: #fff;
-  font-size: 3rem;
-  font-weight: 900;
-  margin: 0 0 5rem 0;
-  background: -webkit-linear-gradient(#fff, #999);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-}
-
-.btn.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  outline: none;
-  color: #fff;
-}
-
-@media (min-width: 576px) {
-}
-
-@media (min-width: 768px) {
-}
-
-@media (min-width: 992px) {
-}
-
-@media (min-width: 1200px) {
+  justify-content: center;
 }
 </style>
-
