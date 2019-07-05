@@ -1,33 +1,43 @@
 <template>
   <div id="app">
     <Navbar></Navbar>
-    <!-- <img alt="Vue logo" src="./assets/logo.png">  -->   
-    <Content></Content>
-    <Footer></Footer>    
+    <div class="container animated fadeIn">
+      <Fileupload></Fileupload>
+      <Content></Content>
+    </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
-import Footer from './components/Footer.vue'
-import Content from './components/Content.vue'
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
+import Content from "./components/Content.vue";
+import Fileupload from "./components/Fileupload.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     Navbar,
     Footer,
-    Content
+    Content,
+    Fileupload
   }
-}
+};
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Signika&display=swap");
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Signika", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+}
+
+html,
+body {
+  font-family: "Signika", sans-serif;
 }
 </style>
