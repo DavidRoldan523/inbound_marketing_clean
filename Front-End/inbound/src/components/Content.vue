@@ -35,16 +35,17 @@
           <form>
             <div class="form-group mt-3">
               <label for="exampleInputEmail1">Nombre Columna Email</label>
-              <input id="name" type="text" class="form-control ancho"  />
+              <input id="name" type="text" class="form-control ancho" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Delimitador</label>
               <select class="form-control" id="exampleFormControlSelect1">
-                <option>,</option>
-                <option>;</option>
-                <option>|</option>
-                <option>"</option>
-                <option>'</option>
+                <option>Selecciona Opción</option>
+                <option>, (Coma)</option>
+                <option>; (Punto y coma)</option>
+                <option>| (Pipe)</option>
+                <option>" (Comillas dobles)</option>
+                <option>' (Comilla Simple)</option>
               </select>
             </div>
             <div class="form-group">
@@ -62,7 +63,6 @@
           </button>
         </div>
       </div>
-      <div class="card-footer text-muted"></div>
     </div>
   </div>
 </template>
@@ -127,7 +127,7 @@ export default {
 
 <style scoped>
 img {
-  width: 25%;
+  width: 20%;
   height: auto;
 }
 
@@ -146,16 +146,12 @@ img {
  * Styles for demo only 
  */
 
-body {
-  background-color: #fff;
-  margin: 50px;
-}
-
 .container {
   background-color: #fff;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0px 0px 24.08px 3.92px rgba(0, 0, 0, 0.25);
+  width: 50%;
 }
 
 h1 {
@@ -176,8 +172,16 @@ h1 {
   color: #fff;
 }
 
-.ancho {
-  width: 30px;
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
 }
 </style>
 
