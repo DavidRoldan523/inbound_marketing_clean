@@ -37,7 +37,11 @@
               </label>
             </div>
             <div class="col-md-4">
-              <input type="text" class="form-control" id placeholder />
+              <b-row>
+                <b-form-input type="text" v-model="texto" :state="comprobarTexto"></b-form-input>
+                <p>Texto: {{texto}}</p>
+              </b-row>
+             <!--  <input type="text" class="form-control" id placeholder /> -->
             </div>
           </div>
           <div class="form-group row justify-content-center mt-3">
@@ -53,10 +57,14 @@
               </label>
             </div>
             <div class="col-md-4">
-              <select class="form-control" id="exampleFormControlSelect1">
+              <b-row>
+                <b-form-select v-model="select" :options="delimitador"></b-form-select>
+                <p>Seleccion: {{select}}</p>
+              </b-row>
+              <!-- <select class="form-control" id="exampleFormControlSelect1">
                 <option>1</option>
                 <option>2</option>
-              </select>
+              </select> -->
             </div>
           </div>
           <div class="row justify-content-center mt-3">
@@ -72,7 +80,11 @@
               </label>
             </div>
             <div class="col-md-4">
-              <input type="text" class="form-control" id placeholder />
+              <b-row>
+                <b-form-input type="text" v-model="resultado" :state="comprobarResultado"></b-form-input>
+                <p>Result: {{resultado}}</p>
+              </b-row>
+              <!-- <input type="text" class="form-control" id placeholder /> -->
             </div>
           </div>
         </form>
@@ -102,8 +114,35 @@
 
 <script>
 export default {
-  name: "Content"
+  name: "Content",
+  name: "Form",
+  /*Validación Campos */
+  data() {
+    return {
+      texto: "",
+      resultado: "",
+      select: null,
+      archivo: null,
+      submitstatus: null,
+      delimitador: [
+        { value: null, text: "Seleccione un Delimitador" },
+        { value: ",", text: ", (Coma)" },
+        { value: ";", text: "; (Punto y coma)" },
+        { value: "|", text: "| (Pipe)" }
+      ]
+    };
+  },
+  computed: {
+    comprobarTexto() {
+      return this.texto.length > 3 ? true : false;
+    },
+    comprobarResultado() {
+      return this.resultado.length > 3 ? true : false;
+    }
+  }
 };
+
+
 
 $(function() {
   $('[data-toggle="tooltip"]').tooltip();
@@ -164,11 +203,11 @@ $(function() {
   bs_input_file();
 });
 
-Swal.fire({
+/* Swal.fire({
   title: "¿Estas seguro?",
   text: "Una vez hecho el proceso no podras revertirlo!",
   type: "warning",
-  showCancelButton: true,
+  showCancelButton: true, 
   confirmButtonColor: "#3085d6",
   cancelButtonColor: "#d33",
   cancelButtonText: "Cancelar",
@@ -177,7 +216,7 @@ Swal.fire({
   if (result.value) {
     Swal.fire("Enhorabuena!", "Tu archivo ha sido cargado.", "success");
   }
-});
+}); */
 </script>
 
 
