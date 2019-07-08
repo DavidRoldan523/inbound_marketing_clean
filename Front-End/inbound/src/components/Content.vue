@@ -120,7 +120,7 @@ export default {
         })
         .then(function (response) {
             //handle success
-            console.log(response);
+            console.log(response.data);
         })
         .catch(function (response) {
             //handle error
