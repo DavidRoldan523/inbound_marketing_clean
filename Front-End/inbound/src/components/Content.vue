@@ -16,6 +16,7 @@
                   id="customFileLang"
                   name="file"
                   lang="es"
+                  accept=".csv"
                   required
                 />
                 <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
@@ -190,7 +191,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://localhost:8004/api/v1/transform/",
+        url: "http://104.131.169.113:8003/api/v1/transform/",
         data: formD,
         config: { headers: { "Content-Type": "multipart/form-data", 
           "Authorization" : "Token f94fd116a36341bb9fdc72a92fee199cdf78f11c"} }
