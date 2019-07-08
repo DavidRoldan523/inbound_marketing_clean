@@ -28,7 +28,7 @@ def service(request):
         #Get Data
         csv_file = request.FILES['file']
         column_email_name = request.data.get('email_column_name')
-        column_status_email = request.data.get('colum_status_email')
+        column_status_email = request.data.get('column_status_email')
         delimiter = request.data.get('delimiter')
         #Proccess CSV
         dataframe = pd.read_csv(csv_file, sep=delimiter, quotechar="'", error_bad_lines=False)
@@ -40,4 +40,7 @@ def service(request):
         dataframe.to_csv(response, index=False, sep=delimiter)
         return response
     except Exception as e:
-        return Response({'Error': e}, status.HTTP_400_BAD_REQUEST)
+        if status.HTTP_500_INTERNAL_SERVER_ERROR:
+            return Response({'500_internal_server_error':'Bad file'})
+        else:
+            return Response({'Error': e})
