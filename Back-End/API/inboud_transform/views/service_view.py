@@ -40,4 +40,7 @@ def service(request):
         dataframe.to_csv(response, index=False, sep=delimiter)
         return response
     except Exception as e:
-        return Response({'Error': e}, status.HTTP_400_BAD_REQUEST)
+        if status.HTTP_500_INTERNAL_SERVER_ERROR:
+            return Response({'500_internal_server_error':'Bad file'})
+        else:
+            return Response({'Error': e})
