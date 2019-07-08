@@ -5,30 +5,26 @@
         <img class="animated heartBeat" src="@/assets/martechlogo.png" alt />
       </div>
       <div class="card-body pt-1">
-        <form id="formTest" method="POST" action="#" enctype="multipart/form-data">
+        <form id="formTest" novalidate method="POST" action="#" enctype="multipart/form-data">
           <!-- COMPONENT START -->
           <div class="archivo">
             <div class="form-group col-md-8">
               <div class="custom-file mt-2">
-                <input type="file" class="custom-file-input" id="customFileLang" name="file" lang="es" />
+                <input
+                  type="file"
+                  class="custom-file-input form-control-file"
+                  id="customFileLang"
+                  name="file"
+                  lang="es"
+                  required
+                />
                 <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
-              </div>
-              <!-- <div class="input-group input-file" name="Fichier1">
-                <span class="input-group-btn">
-                  <button class="btn btn-primary btn-choose" type="button">
-                    <i class="fas fa-upload"></i>
-                  </button>
-                </span>
-                <input type="file" id="archivo" name="csv" class="form-control" placeholder="Selecciona Archivo CSV   " />
-                <span class="input-group-btn">
-                  <button class="btn btn-outline-warning btn-reset" type="button">Resetear</button>
-                </span>
-              </div>-->
+              </div>              
             </div>
           </div>
           <div class="row justify-content-center mt-3">
             <div class="col-md-3">
-              <label for>
+              <label for="validationCustom02">
                 Nombre Columna Email
                 <i
                   class="fas fa-question-circle fa-xs"
@@ -39,12 +35,23 @@
               </label>
             </div>
             <div class="col-md-4">
-              <input type="text" name="email_column_name" class="form-control" id placeholder />
+              <!-- <b-row>
+                <b-form-input type="text" id="names" v-model="texto" :state="comprobarTexto"></b-form-input>
+                <p>Texto: {{texto}}</p>
+              </b-row>-->
+              <input
+                type="text"
+                name="email_column_name"
+                class="form-control"
+                id="validationCustom02"
+                required
+              />
+              <div class="invalid-feedback">Ingrese datos</div>
             </div>
           </div>
           <div class="form-group row justify-content-center mt-3">
             <div class="col-md-3">
-              <label for="exampleFormControlSelect1">
+              <label for="validationCustom02">
                 Delimitador
                 <i
                   class="fas fa-question-circle fa-xs"
@@ -55,15 +62,28 @@
               </label>
             </div>
             <div class="col-md-4">
-              <select class="form-control" id="exampleFormControlSelect1" name="delimiter">
-                <option>,</option>
-                <option>;</option>
+              <!--            <b-row>
+                <b-form-select id="select" v-model="select" :options="delimitador"></b-form-select>
+                <p>Seleccion: {{select}}</p>
+              </b-row>-->
+              <select
+                class="form-control"
+                id="validationCustom02"
+                name="delimiter"
+                placeholder="CP"
+                required
+              >
+                <option value disabled selected hidden>Seleccione</option>
+                <option value=",">, (Coma)</option>
+                <option value=";">; (Punto y coma)</option>
+                <option value="|">| (Pipe)</option>
               </select>
+              <div class="invalid-feedback">Ingrese datos</div>
             </div>
           </div>
           <div class="row justify-content-center mt-3">
             <div class="col-md-3">
-              <label for>
+              <label for="validationCustom03">
                 Nombre Nueva Columna
                 <i
                   class="fas fa-question-circle fa-xs"
@@ -74,19 +94,45 @@
               </label>
             </div>
             <div class="col-md-4">
-              <input type="text" class="form-control" name="column_status_email" placeholder />
+              <!--  <b-row>
+                <b-form-input
+                  type="text"
+                  id="result"
+                  v-model="resultado"
+                  :state="comprobarResultado"
+                ></b-form-input>
+                <p>Result: {{resultado}}</p>
+              </b-row>-->
+              <input
+                type="text"
+                class="form-control"
+                id="validationCustom03"
+                name="column_status_email"
+                required
+              />
+              <div class="invalid-feedback">Ingrese datos</div>
             </div>
           </div>
         </form>
         <div class="d-flex justify-content-around mt-4">
-          <button type="button" class="btn btn-outline-info btn-lg">
+          <button
+            type="button"
+            @click="resetform()"
+            value="Reset"
+            class="btn btn-outline-info btn-lg"
+          >
             <i class="fas fa-broom"></i> Limpiar
           </button>
-          <button type="button" @click="mostrarFormulario" class="btn btn-outline-success btn-lg">
+          <button
+            type="submit"
+            id="registrarForm"
+            @click="mostrarFormulario"
+            class="btn btn-outline-success btn-lg"
+          >
             <i class="fas fa-caret-right"></i> Ejecutar
           </button>
         </div>
-        <hr />
+        <!-- <hr>
         <div class="progress">
           <div
             class="progress-bar progress-bar-striped progress-bar-animated"
@@ -96,7 +142,7 @@
             aria-valuemax="50"
             style="width: 100%"
           >50%</div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -107,29 +153,111 @@ import axios from "axios";
 
 export default {
   name: "Content",
+  name: "Form",
+
+  /*Validación Campos */
+  data() {
+    return {
+      texto: "",
+      resultado: "",
+      select: "",
+      archivo: null,
+      submitstatus: null,
+      delimitador: [
+        { value: null, text: "Seleccione un Delimitador" },
+        { value: ",", text: ", (Coma)" },
+        { value: ";", text: "; (Punto y coma)" },
+        { value: "|", text: "| (Pipe)" }
+      ]
+    };
+  },
+
   methods: {
+    resetform() {
+      var archivo = document.getElementById("customFileLang");
+      var placeholder = archivo.parentElement.querySelector(
+        "label.custom-file-label"
+      );
+      if (placeholder.innerText != "Seleccionar archivo... ")
+        placeholder.innerText = "Seleccionar archivo ...";
+      document.getElementById("formTest").reset();
+
+    },
+
     mostrarFormulario() {
-      let form = document.getElementById('formTest');
+      let form = document.getElementById("formTest");
       let formD = new FormData(form);
 
       axios({
-        method: 'post',
-        url: 'http://104.131.169.113:8003/api/v1/transform/',
+        method: "post",
+        url: "http://localhost:8004/api/v1/transform/",
         data: formD,
-        config: { headers: {'Content-Type': 'multipart/form-data' }}
+        config: { headers: { "Content-Type": "multipart/form-data" } }
+      })
+        .then(function(response) {
+          //handle success
+          console.log(response.data);
+          download("test.csv",response.data);
         })
-        .then(function (response) {
-            //handle success
-            console.log(response.data);
-        })
-        .catch(function (response) {
-            //handle error
-            console.log(response);
+        .catch(function(response) {
+          //handle error
+          console.log(response);
         });
     }
   }
 };
+//
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
 
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+
+}
+//
+(function() {
+  "use strict";
+
+  window.addEventListener(
+    "load",
+    function() {
+      var form = document.getElementById("formTest");
+      var btn = document.getElementById("registrarForm");
+      btn.addEventListener(
+        "click",
+        function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    },
+    false
+  );
+})();
+
+//
+
+window.addEventListener("load", function() {
+  var archivo = document.getElementById("customFileLang");
+  archivo.addEventListener("change", function() {
+    var nombreArchivoSubido = this.files[0].name;
+    var placeholder = this.parentElement.querySelector(
+      "label.custom-file-label"
+    );
+    console.log(placeholder.innerText);
+    placeholder.innerText = nombreArchivoSubido;
+  });
+});
 
 // Funcion para activar los tooltip
 $(function() {
@@ -211,7 +339,6 @@ $(function() {
 
 
 <style>
-
 img {
   width: 18%;
   height: auto;
