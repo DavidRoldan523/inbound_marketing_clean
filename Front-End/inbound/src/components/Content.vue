@@ -135,7 +135,7 @@
         
         </div>
         <div style="text-align: center">
-          <img id="loadImage" src="@/assets/load.gif" alt="" style="visibility: hidden"/>
+          <img id="loadImage" src="@/assets/load2.gif" alt="" style="visibility: hidden"/>
         </div>
         
         <!-- <hr>
