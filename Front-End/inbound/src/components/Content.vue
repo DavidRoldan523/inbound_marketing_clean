@@ -194,7 +194,7 @@ export default {
         url: "http://104.131.169.113:8003/api/v1/transform/",
         data: formD,
         config: { headers: { "Content-Type": "multipart/form-data", 
-          "Authorization" : "Token f94fd116a36341bb9fdc72a92fee199cdf78f11c"} }
+          "Authorization" : "Token eb93f4100bc972609156afd6f1d49e9be9c65c18"} }
       })
         .then(function(response) {
           //handle success
