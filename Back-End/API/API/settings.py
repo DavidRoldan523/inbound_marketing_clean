@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tup51d*o)&vu#f8z@&a$@(=6i!mlvv3*0*f3a!ph*y-2i=(iu4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -74,7 +74,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'API.urls'
 
 #enable CORS
-#CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
 
 #Specific domains
 CORS_ORIGIN_WHITELIST = (

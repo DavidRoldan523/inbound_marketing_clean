@@ -135,7 +135,7 @@
         
         </div>
         <div style="text-align: center">
-          <img id="loadImage" src="@/assets/load.gif" alt="" style="visibility: hidden"/>
+          <img id="loadImage" src="@/assets/load2.gif" alt="" style="visibility: hidden"/>
         </div>
         
         <!-- <hr>
@@ -199,12 +199,7 @@ export default {
         method: "post",
         url: "http://104.131.169.113:8003/api/v1/transform/",
         data: formD,
-        config: {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Access-Control-Allow-Origin": "*"
-          }
-        }
+        config: { headers: { "Content-Type": "multipart/form-data"}, "Access-Control-Allow-Origin:":"*"}
       })
         .then(function(response) {
           //handle success
