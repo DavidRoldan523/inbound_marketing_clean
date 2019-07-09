@@ -20,7 +20,7 @@
                   required
                 />
                 <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
-              </div>              
+              </div>
             </div>
           </div>
           <div class="row justify-content-center mt-3">
@@ -131,8 +131,13 @@
             class="btn btn-outline-success btn-lg"
           >
             <i class="fas fa-caret-right"></i> Ejecutar
-          </button>
+          </button>        
+        
         </div>
+        <div style="text-align: center">
+          <img id="loadImage" src="@/assets/load.gif" alt="" style="visibility: hidden"/>
+        </div>
+        
         <!-- <hr>
         <div class="progress">
           <div
@@ -143,7 +148,7 @@
             aria-valuemax="50"
             style="width: 100%"
           >50%</div>
-        </div> -->
+        </div>-->
       </div>
     </div>
   </div>
@@ -182,10 +187,11 @@ export default {
       if (placeholder.innerText != "Seleccionar archivo... ")
         placeholder.innerText = "Seleccionar archivo ...";
       document.getElementById("formTest").reset();
-
     },
 
     mostrarFormulario() {
+      document.getElementById("registrarForm").disabled = true;
+      document.getElementById("loadImage").style.visibility = "visible";
       let form = document.getElementById("formTest");
       let formD = new FormData(form);
 
@@ -193,36 +199,49 @@ export default {
         method: "post",
         url: "http://104.131.169.113:8003/api/v1/transform/",
         data: formD,
-        config: { headers: { "Content-Type": "multipart/form-data", "Access-Control-Allow-Origin": "*"} }
+        config: {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Access-Control-Allow-Origin": "*"
+          }
+        }
       })
         .then(function(response) {
           //handle success
           var archivo = document.getElementById("customFileLang");
           download(archivo.files[0].name, response.data);
+          document.getElementById("registrarForm").disabled = false;
+          document.getElementById("loadImage").style.visibility = "hidden";
+
         })
         .catch(function(response) {
           //handle error
           console.log(response);
-        });
+          document.getElementById("registrarForm").disabled = false;
+          document.getElementById("loadImage").style.visibility = "hidden";
+
+        }); 
     }
   }
 };
 //
 function download(filename, text) {
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(text));
-  element.setAttribute('download', filename);
+  var element = document.createElement("a");
+  element.setAttribute(
+    "href",
+    "data:text/csv;charset=utf-8," + encodeURIComponent(text)
+  );
+  element.setAttribute("download", filename);
 
-  element.style.display = 'none';
+  element.style.display = "none";
   document.body.appendChild(element);
 
   element.click();
 
   document.body.removeChild(element);
-
 }
 //
-(function() {
+(function validateForm() {
   "use strict";
 
   window.addEventListener(
@@ -238,6 +257,7 @@ function download(filename, text) {
             event.stopPropagation();
           }
           form.classList.add("was-validated");
+          return true;
         },
         false
       );
@@ -255,7 +275,6 @@ window.addEventListener("load", function() {
     var placeholder = this.parentElement.querySelector(
       "label.custom-file-label"
     );
-    console.log(placeholder.innerText);
     placeholder.innerText = nombreArchivoSubido;
   });
 });
