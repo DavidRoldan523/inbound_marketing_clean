@@ -197,8 +197,8 @@ export default {
       })
         .then(function(response) {
           //handle success
-          console.log(response.data);
-          download("test.csv",response.data);
+          var archivo = document.getElementById("customFileLang");
+          download(archivo.files[0].name, response.data)
         })
         .catch(function(response) {
           //handle error
