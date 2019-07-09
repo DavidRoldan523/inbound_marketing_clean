@@ -117,17 +117,9 @@
         </form>
         <div class="d-flex justify-content-around mt-4">
           <button
-            type="button"
-            @click="resetform()"
-            value="Reset"
-            class="btn btn-outline-info btn-lg"
-          >
-            <i class="fas fa-broom"></i> Limpiar
-          </button>
-          <button
             type="submit"
             id="registrarForm"
-            @click="mostrarFormulario"
+            @click="mostrarFormulario"            
             class="btn btn-outline-success btn-lg"
           >
             <i class="fas fa-caret-right"></i> Ejecutar
@@ -193,7 +185,8 @@ export default {
       document.getElementById("registrarForm").disabled = true;
       document.getElementById("loadImage").style.visibility = "visible";
       let form = document.getElementById("formTest");
-      let formD = new FormData(form);
+      let formD = new FormData(form);      
+      
 
       axios({
         method: "post",
@@ -204,7 +197,8 @@ export default {
         .then(function(response) {
           //handle success
           var archivo = document.getElementById("customFileLang");
-          download(archivo.files[0].name, response.data);
+          download((archivo.files[0].name).split(".")[0] + "Limpio.csv",  response.data);
+          resetform();
           document.getElementById("registrarForm").disabled = false;
           document.getElementById("loadImage").style.visibility = "hidden";
 
