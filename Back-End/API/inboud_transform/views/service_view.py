@@ -1,8 +1,6 @@
 import pandas as pd
 import re
 import dns.resolver
-import socket
-import smtplib
 import csv
 
 from rest_framework.decorators import api_view
@@ -19,26 +17,9 @@ def verify_email(email):
     if match == None:
         return 0
     try:
-        records = dns.resolver.query(email.split('@')[1], 'MX')
-        mxRecord = records[0].exchange
-        mxRecord = str(mxRecord)
-        host_name = socket.gethostname()
+        dns.resolver.query(email.split('@')[1], 'MX')
     except Exception:
         return 0
-    """
-    try:
-        #SMTP lib setup (use debug level for full output)
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.set_debuglevel(0)
-        # SMTP Conversation
-        server.connect(mxRecord)
-        server.helo(host)
-        server.mail('me@domain.com')
-        code, message = server.rcpt(str(email))
-        server.quit()
-    except Exception:
-        return 0
-    """
     return 1
 
 @api_view(['POST'])
@@ -47,7 +28,7 @@ def service(request):
         #Get Data
         csv_file = request.FILES['file']
         column_email_name = request.data.get('email_column_name')
-        column_status_email = request.data.get('colum_status_email')
+        column_status_email = request.data.get('column_status_email')
         delimiter = request.data.get('delimiter')
         #Proccess CSV
         dataframe = pd.read_csv(csv_file, sep=delimiter, quotechar="'", error_bad_lines=False)
@@ -59,6 +40,7 @@ def service(request):
         dataframe.to_csv(response, index=False, sep=delimiter)
         return response
     except Exception as e:
-        return Response({'Error': e}, status.HTTP_400_BAD_REQUEST)
-
-
+        if status.HTTP_500_INTERNAL_SERVER_ERROR:
+            return Response({'500_internal_server_error':'Bad file'})
+        else:
+            return Response({'Error': e})

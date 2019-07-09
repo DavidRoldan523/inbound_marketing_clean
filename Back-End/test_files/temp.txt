@@ -1,3 +1,0 @@
- 2019-05-31 00:13:54 UTC +0000,Mobile,Social - Facebook 3AWPO 36,N/A,rosramir3z@gmail.com,true,N/A,N/A,medio a los hombros,ondulado,medio,si lo tengo pintado / teÃ±ido,reparaciÃ³n,libre de fragancias,producto con ingredientes naturales,prefiero pagar un poco mÃ¡s por un producto mejor,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Form,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Repara con Bourbon & Manuka Honey
-
-Date,Device,Sub-Channel,UID (passed in),Email - Lead Capture Data,"Si, me gustarÃ­a recibir promociones e informaciÃ³n de P&amp
