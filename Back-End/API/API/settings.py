@@ -74,12 +74,13 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'API.urls'
 
 #enable CORS
-CORS_ORIGIN_ALLOW_ALL = True
+#CORS_ORIGIN_ALLOW_ALL = True
 
 #Specific domains
-# CORS_ORIGIN_WHITELIST = (
-#     'http//:localhost:8000',
-# )
+CORS_ORIGIN_WHITELIST = (
+    'http://104.131.169.113:8003',
+    'http://104.131.169.113:8004'
+)
 
 TEMPLATES = [
     {
