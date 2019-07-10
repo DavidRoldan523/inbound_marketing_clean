@@ -11,16 +11,30 @@ from pandarallel import pandarallel  # pip install pandarallel
 
 pandarallel.initialize()
 
+
 def verify_email(email):
-    email = email.lower()
+    valid_emails_exceptions = ['gmail.com.mx']
+    invalid_emails_exceptions = ['gimail.com', 'iclud.com', 'gamil.com',
+                                 'hotamial.com', 'gnail.com', 'iclojd.com',]
+    email = email.strip().lower()
     match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
     if match == None:
-        return 0
+        return "Invalido"
+
+    domain = email.split('@')[1]
+
+    if domain in invalid_emails_exceptions:
+        return "Invalido"
+    
+    if domain in valid_emails_exceptions:
+        return "Valido"
+
     try:
-        dns.resolver.query(email.split('@')[1], 'MX')
+        dns.resolver.query(domain, 'MX')
     except Exception:
-        return 0
-    return 1
+        return "Invalido"
+
+    return "Valido"
 
 @api_view(['POST'])
 def service(request):
@@ -31,8 +45,8 @@ def service(request):
         column_status_email = request.data.get('column_status_email')
         delimiter = request.data.get('delimiter')
         #Proccess CSV
-        dataframe = pd.read_csv(csv_file, sep=delimiter, quotechar="'", error_bad_lines=False)
-        dataframe.insert(dataframe.columns.get_loc(column_email_name) + 1, column_status_email, 0)
+        dataframe = pd.read_csv(csv_file, sep=delimiter, quotechar="'", error_bad_lines=False, skip_blank_lines=False)
+        dataframe.insert(dataframe.columns.get_loc(column_email_name) + 1, column_status_email, "Valido")
         dataframe[column_status_email] = dataframe[column_email_name].parallel_apply(verify_email)
         #Generate New CSV
         response = HttpResponse(content_type='text/csv')
