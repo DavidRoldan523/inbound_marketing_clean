@@ -220,9 +220,6 @@ export default {
           console.log(response);
           document.getElementById("registrarForm").disabled = false;
           document.getElementById("loadImage").style.visibility = "hidden";
-<<<<<<< HEAD
-        });
-=======
           
           var archivo = document.getElementById("customFileLang");
           var placeholder = archivo.parentElement.querySelector(
@@ -235,7 +232,6 @@ export default {
           document.getElementById("formTest").reset();
 
         }); 
->>>>>>> development
     }
   }
 };
