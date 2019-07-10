@@ -149,6 +149,10 @@
 <script>
 import axios from "axios";
 
+window.addEventListener("load", function() {
+  document.querySelector(".custom-file-label").className += " spanish";
+});
+
 export default {
   name: "Content",
   name: "Form",
@@ -351,6 +355,9 @@ $(function() {
 img {
   width: 15%;
   height: auto;
+}
+.spanish::after {
+  content: "Buscar" !important;
 }
 
 .card {
