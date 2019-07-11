@@ -13,7 +13,8 @@ pandarallel.initialize()
 
 
 def verify_email(email):
-    valid_emails_exceptions = ['gmail.com.mx']
+    valid_emails_exceptions = ['gmail.com.mx', 'gmail.com.co', 'hotmail.com.co',
+                               'hotmail.com.mx']
     invalid_emails_exceptions = ['gimail.com', 'iclud.com', 'gamil.com',
                                  'hotamial.com', 'gnail.com', 'iclojd.com',]
     email = email.strip().lower()
