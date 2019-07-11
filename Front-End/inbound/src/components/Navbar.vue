@@ -45,7 +45,17 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>
+            <div class="embed-responsive embed-responsive-16by9">              
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/OHy1yJr6EtQ"
+                frameborder="0"
+                allowfullscreen                
+              ></iframe>
+            </div>
+            <img class="img-fluid" alt="Responsive image" src="@/assets/Screenshot.png" />
+            <!-- <p>
               <strong>1. Seleccionar Archivo:</strong> Dar click en el botón
               <span class>
                 <button class="btn btn-primary btn-choose" type="button">
@@ -65,7 +75,7 @@
             </p>
             <p>
               <strong>5. Descarga:</strong> Procesado el archivo permitirá descargar el archivo modificado.
-            </p>
+            </p>-->
           </div>
           <div class="modal-footer text-center">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Entendido</button>
@@ -88,6 +98,11 @@ $("#myModal").on("shown.bs.modal", function() {
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Fredoka+One&display=swap");
 
+img {
+  width: 100%;
+  height: auto;
+}
+
 p {
   text-align: justify;
 }
@@ -101,8 +116,6 @@ i {
   animation-delay: 0.5s;
   animation-iteration-count: inherit;
 }
-
-
 
 a:hover {
   animation-duration: 3s;
