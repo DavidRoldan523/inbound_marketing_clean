@@ -54,28 +54,25 @@
                 allowfullscreen                
               ></iframe>
             </div>
-            <img class="img-fluid" alt="Responsive image" src="@/assets/Screenshot.png" />
-            <!-- <p>
-              <strong>1. Seleccionar Archivo:</strong> Dar click en el botón
-              <span class>
-                <button class="btn btn-primary btn-choose" type="button">
-                  <i class="fas fa-upload"></i>
-                </button>
-              </span> con el cual se abrirá el explorador de archivos permitiendo seleccionar el archivo CSV que se desea agregar.
+
+            <p>
+              <strong>1.  Sintaxis correo:</strong>              
             </p>
             <p>
-              <strong>2. Nombre columna email:</strong> Es necesario especificar el nombre exacto de la columna en la cual se encuentra almacenado el email que se desea analizar y modificar.
+               - Para la verificación de la sintaxis es necesario determinar que el correo se encuentre 
+               dividido en (nombre de usuario, seguido de '@', finalizando con un dominio).         
+            </p>     
+            <p>
+              - Nombre de usuario: El nombre de usuario no debe contener caracteres especiales ni espacios.
             </p>
             <p>
-              <strong>3. Delimitador:</strong> Es necesario seleccionar el delimitador que posee el archivo puede ser ("," ";" "|").
+               - Debe contener un '@' después del nombre de usuario y antes del nombre del dominio sin espacios.
             </p>
+              <strong>2. Dominio existente:</strong>
             <p>
-              <strong>4. Ejecutar:</strong> Al presionar el botón <button type="button" class="btn btn-outline-success">
-            <i class="fas fa-caret-right"></i> Ejecutar</button> se iniciará el procesamiento del archivo seleccionado detallando el porcentaje del progreso en la ejecución.
+               - Verificada la sintaxis del usuario se debe determinar que el dominio del correo exista y esté 
+               escrito correctamente ejemplo: (gmail.com, hotmail.com, yahoo.com, outlook.com).
             </p>
-            <p>
-              <strong>5. Descarga:</strong> Procesado el archivo permitirá descargar el archivo modificado.
-            </p>-->
           </div>
           <div class="modal-footer text-center">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Entendido</button>
