@@ -13,12 +13,10 @@ pandarallel.initialize()
 
 
 def verify_email(email):
-    valid_emails_exceptions = ['gmail.com.mx']
+    valid_emails_exceptions = ['gmail.com.mx', 'gmail.com.co', 'hotmail.com.co',
+                               'hotmail.com.mx']
     invalid_emails_exceptions = ['gimail.com', 'iclud.com', 'gamil.com',
                                  'hotamial.com', 'gnail.com', 'iclojd.com',]
-    if type(email) != str or email == '' or email == ' ':
-        return "Invalido"
-
     email = email.strip().lower()
     match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
     if match == None:
