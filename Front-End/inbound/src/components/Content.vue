@@ -210,28 +210,26 @@ export default {
           );
           if (placeholder.innerText != "Seleccionar archivo... ")
             placeholder.innerText = "Seleccionar archivo ...";
-          if(document.getElementById('formTest').className = "was-validated")
-            document.getElementById('formTest').className = ""
+          if ((document.getElementById("formTest").className = "was-validated"))
+            document.getElementById("formTest").className = "";
           document.getElementById("formTest").reset();
-
         })
         .catch(function(response) {
           //handle error
           console.log(response);
           document.getElementById("registrarForm").disabled = false;
           document.getElementById("loadImage").style.visibility = "hidden";
-          
+
           var archivo = document.getElementById("customFileLang");
           var placeholder = archivo.parentElement.querySelector(
             "label.custom-file-label"
           );
           if (placeholder.innerText != "Seleccionar archivo... ")
             placeholder.innerText = "Seleccionar archivo ...";
-          if(document.getElementById('formTest').className = "was-validated")
-            document.getElementById('formTest').className = ""
+          if ((document.getElementById("formTest").className = "was-validated"))
+            document.getElementById("formTest").className = "";
           document.getElementById("formTest").reset();
-
-        }); 
+        });
     }
   }
 };
