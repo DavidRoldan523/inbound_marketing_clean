@@ -187,7 +187,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://ec2-34-238-162-57.compute-1.amazonaws.com:8000/api/v1/transform/",
+        url: "http://104.131.169.113:8003/api/v1/transform/",
         data: formD,
         config: {
           headers: { "Content-Type": "multipart/form-data" },
@@ -210,26 +210,28 @@ export default {
           );
           if (placeholder.innerText != "Seleccionar archivo... ")
             placeholder.innerText = "Seleccionar archivo ...";
-          if ((document.getElementById("formTest").className = "was-validated"))
-            document.getElementById("formTest").className = "";
+          if(document.getElementById('formTest').className = "was-validated")
+            document.getElementById('formTest').className = ""
           document.getElementById("formTest").reset();
+
         })
         .catch(function(response) {
           //handle error
           console.log(response);
           document.getElementById("registrarForm").disabled = false;
           document.getElementById("loadImage").style.visibility = "hidden";
-
+          
           var archivo = document.getElementById("customFileLang");
           var placeholder = archivo.parentElement.querySelector(
             "label.custom-file-label"
           );
           if (placeholder.innerText != "Seleccionar archivo... ")
             placeholder.innerText = "Seleccionar archivo ...";
-          if ((document.getElementById("formTest").className = "was-validated"))
-            document.getElementById("formTest").className = "";
+          if(document.getElementById('formTest').className = "was-validated")
+            document.getElementById('formTest').className = ""
           document.getElementById("formTest").reset();
-        });
+
+        }); 
     }
   }
 };

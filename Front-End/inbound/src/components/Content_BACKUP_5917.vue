@@ -119,21 +119,17 @@
           <button
             type="submit"
             id="registrarForm"
-            @click="mostrarFormulario"
+            @click="mostrarFormulario"            
             class="btn btn-outline-success btn-lg"
           >
             <i class="fas fa-caret-right"></i> Ejecutar
-          </button>
+          </button>        
+        
         </div>
         <div style="text-align: center">
-          <img
-            id="loadImage"
-            src="@/assets/load2.gif"
-            alt
-            style="visibility: hidden; width: 8%; heigth: auto;"
-          />
+          <img id="loadImage" src="@/assets/load2.gif" alt="" style="visibility: hidden; width: 8%; heigth: auto;"/>
         </div>
-
+        
         <!-- <hr>
         <div class="progress">
           <div
@@ -179,28 +175,34 @@ export default {
   },
 
   methods: {
+    resetform() {
+      var archivo = document.getElementById("customFileLang");
+      var placeholder = archivo.parentElement.querySelector(
+        "label.custom-file-label"
+      );
+      if (placeholder.innerText != "Seleccionar archivo... ")
+        placeholder.innerText = "Seleccionar archivo ...";
+      document.getElementById("formTest").reset();
+    },
+
     mostrarFormulario() {
       document.getElementById("registrarForm").disabled = true;
       document.getElementById("loadImage").style.visibility = "visible";
       let form = document.getElementById("formTest");
-      let formD = new FormData(form);
+      let formD = new FormData(form);      
+      
 
       axios({
         method: "post",
-        url: "http://ec2-34-238-162-57.compute-1.amazonaws.com:8000/api/v1/transform/",
+        url: "http://104.131.169.113:8003/api/v1/transform/",
         data: formD,
-        config: {
-          headers: { "Content-Type": "multipart/form-data" },
-          "Access-Control-Allow-Origin:": "*"
-        }
+        config: { headers: { "Content-Type": "multipart/form-data"}, "Access-Control-Allow-Origin:":"*"}
       })
         .then(function(response) {
           //handle success
           var archivo = document.getElementById("customFileLang");
-          download(
-            archivo.files[0].name.split(".")[0] + " - Limpio.csv",
-            response.data
-          );
+          download((archivo.files[0].name).split(".")[0] + "Limpio.csv",  response.data);
+          resetform();
           document.getElementById("registrarForm").disabled = false;
           document.getElementById("loadImage").style.visibility = "hidden";
 
@@ -220,16 +222,7 @@ export default {
           document.getElementById("registrarForm").disabled = false;
           document.getElementById("loadImage").style.visibility = "hidden";
 
-          var archivo = document.getElementById("customFileLang");
-          var placeholder = archivo.parentElement.querySelector(
-            "label.custom-file-label"
-          );
-          if (placeholder.innerText != "Seleccionar archivo... ")
-            placeholder.innerText = "Seleccionar archivo ...";
-          if ((document.getElementById("formTest").className = "was-validated"))
-            document.getElementById("formTest").className = "";
-          document.getElementById("formTest").reset();
-        });
+        }); 
     }
   }
 };
@@ -249,9 +242,6 @@ function download(filename, text) {
 
   document.body.removeChild(element);
 }
-
-//
-
 //
 (function validateForm() {
   "use strict";
