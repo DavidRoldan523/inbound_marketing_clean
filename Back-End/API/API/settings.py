@@ -78,7 +78,7 @@ ROOT_URLCONF = 'API.urls'
 
 #Specific domains
 CORS_ORIGIN_WHITELIST = (
-    'http://ec2-34-238-162-57.compute-1.amazonaws.com:8003',
+    'http://ec2-34-238-162-57.compute-1.amazonaws.com:8000',
     'http://ec2-34-238-162-57.compute-1.amazonaws.com:8004'
 )
 

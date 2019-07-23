@@ -194,7 +194,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://104.131.169.113:8003/api/v1/transform/",
+        url: "http://ec2-34-238-162-57.compute-1.amazonaws.com:8000/api/v1/transform/",
         data: formD,
         config: { headers: { "Content-Type": "multipart/form-data"}, "Access-Control-Allow-Origin:":"*"}
       })
